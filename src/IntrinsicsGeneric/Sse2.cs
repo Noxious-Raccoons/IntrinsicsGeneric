@@ -1,0 +1,248 @@
+﻿using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
+
+namespace IntrinsicsGeneric
+{
+    public abstract class Sse2<T>
+        where T : unmanaged
+    {
+        internal Sse2(){ }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<T> Add(Vector128<T> va, Vector128<T> vb)
+        {
+            if (typeof(T) == typeof(sbyte))
+            {
+                return Sse2.Add(va.As<T, sbyte>(), vb.As<T, sbyte>()).As<sbyte, T>();
+            }
+            if (typeof(T) == typeof(byte))
+            {
+                return Sse2.Add(va.As<T, byte>(), vb.As<T, byte>()).As<byte, T>();
+            }
+            if (typeof(T) == typeof(short))
+            {
+                return Sse2.Add(va.As<T, short>(), vb.As<T, short>()).As<short, T>();
+            }
+            if (typeof(T) == typeof(ushort))
+            {
+                return Sse2.Add(va.As<T, ushort>(), vb.As<T, ushort>()).As<ushort, T>();
+            }
+            if (typeof(T) == typeof(int))
+            {
+                return Sse2.Add(va.As<T, int>(), vb.As<T, int>()).As<int, T>();
+            }
+            if (typeof(T) == typeof(uint))
+            {
+                return Sse2.Add(va.As<T, uint>(), vb.As<T, uint>()).As<uint, T>();
+            }
+            if (typeof(T) == typeof(long))
+            {
+                return Sse2.Add(va.As<T, long>(), vb.As<T, long>()).As<long, T>();
+            }
+            if (typeof(T) == typeof(ulong))
+            {
+                return Sse2.Add(va.As<T, ulong>(), vb.As<T, ulong>()).As<ulong, T>();
+            }
+            if (typeof(T) == typeof(double))
+            {
+                return Sse2.Add(va.As<T, double>(), vb.As<T, double>()).As<double, T>();
+            }
+            if (typeof(T) == typeof(float))
+            {
+                return Sse.Add(va.As<T, float>(), vb.As<T, float>()).As<float, T>();
+            }
+
+            throw new NotSupportedException();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<T> And(Vector128<T> va, Vector128<T> vb)
+        {
+            if (typeof(T) == typeof(sbyte))
+            {
+                return Sse2.And(va.As<T, sbyte>(), vb.As<T, sbyte>()).As<sbyte, T>();
+            }
+            if (typeof(T) == typeof(byte))
+            {
+                return Sse2.And(va.As<T, byte>(), vb.As<T, byte>()).As<byte, T>();
+            }
+            if (typeof(T) == typeof(short))
+            {
+                return Sse2.And(va.As<T, short>(), vb.As<T, short>()).As<short, T>();
+            }
+            if (typeof(T) == typeof(ushort))
+            {
+                return Sse2.And(va.As<T, ushort>(), vb.As<T, ushort>()).As<ushort, T>();
+            }
+            if (typeof(T) == typeof(int))
+            {
+                return Sse2.And(va.As<T, int>(), vb.As<T, int>()).As<int, T>();
+            }
+            if (typeof(T) == typeof(uint))
+            {
+                return Sse2.And(va.As<T, uint>(), vb.As<T, uint>()).As<uint, T>();
+            }
+            if (typeof(T) == typeof(long))
+            {
+                return Sse2.And(va.As<T, long>(), vb.As<T, long>()).As<long, T>();
+            }
+            if (typeof(T) == typeof(ulong))
+            {
+                return Sse2.And(va.As<T, ulong>(), vb.As<T, ulong>()).As<ulong, T>();
+            }
+            if (typeof(T) == typeof(double))
+            {
+                return Sse2.And(va.As<T, double>(), vb.As<T, double>()).As<double, T>();
+            }
+            if (typeof(T) == typeof(float))
+            {
+                return Sse.And(va.As<T, float>(), vb.As<T, float>()).As<float, T>();
+            }
+            
+            throw new NotSupportedException();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe Vector128<T> LoadVector128(T* address)
+        {
+            if (typeof(T) == typeof(sbyte))
+            {
+                return Sse2.LoadVector128((sbyte*) address).As<sbyte, T>();
+            }
+            if (typeof(T) == typeof(byte))
+            {
+                return Sse2.LoadVector128((byte*) address).As<byte, T>();
+            }
+            if (typeof(T) == typeof(short))
+            {
+                return Sse2.LoadVector128((short*) address).As<short, T>();
+            }
+            if (typeof(T) == typeof(ushort))
+            {
+                return Sse2.LoadVector128((ushort*) address).As<ushort, T>();
+            }
+            if (typeof(T) == typeof(int))
+            {
+                return Sse2.LoadVector128((int*) address).As<int, T>();
+            }
+            if (typeof(T) == typeof(uint))
+            {
+                return Sse2.LoadVector128((uint*) address).As<uint, T>();
+            }
+            if (typeof(T) == typeof(long))
+            {
+                return Sse2.LoadVector128((long*) address).As<long, T>();
+            }
+            if (typeof(T) == typeof(ulong))
+            {
+                return Sse2.LoadVector128((ulong*) address).As<ulong, T>();
+            }
+            if (typeof(T) == typeof(double))
+            {
+                return Sse2.LoadVector128((double*) address).As<double, T>();
+            }
+            if (typeof(T) == typeof(float))
+            {
+                return Sse.LoadVector128((float*) address).As<float, T>();
+            }
+
+            throw new NotSupportedException();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe void Store(T* address, Vector128<T> source)
+        {
+            if (typeof(T) == typeof(sbyte))
+            {
+                Sse2.Store((sbyte*) address, source.As<T, sbyte>());
+            }
+            if (typeof(T) == typeof(byte))
+            {
+                Sse2.Store((byte*) address, source.As<T, byte>());
+            }
+            if (typeof(T) == typeof(short))
+            {
+                Sse2.Store((short*) address, source.As<T, short>());
+            }
+            if (typeof(T) == typeof(ushort))
+            {
+                Sse2.Store((ushort*) address, source.As<T, ushort>());
+            }
+            if (typeof(T) == typeof(int))
+            {
+                Sse2.Store((int*) address, source.As<T, int>());
+            }
+            if (typeof(T) == typeof(uint))
+            {
+                Sse2.Store((uint*) address, source.As<T, uint>());
+            }
+            if (typeof(T) == typeof(long))
+            {
+                Sse2.Store((long*) address, source.As<T, long>());
+            }
+            if (typeof(T) == typeof(ulong))
+            {
+                Sse2.Store((ulong*) address, source.As<T, ulong>());
+            }
+            if (typeof(T) == typeof(double))
+            {
+                Sse2.Store((double*) address, source.As<T, double>());
+            }
+            if (typeof(T) == typeof(float))
+            {
+                Sse.Store((float*) address, source.As<T, float>());
+            }
+            
+            throw new NotSupportedException();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<T> Subtract(Vector128<T> va, Vector128<T> vb)
+        {
+            if (typeof(T) == typeof(sbyte))
+            {
+                return Sse2.Subtract(va.As<T, sbyte>(), vb.As<T, sbyte>()).As<sbyte, T>();
+            }
+            if (typeof(T) == typeof(byte))
+            {
+                return Sse2.Subtract(va.As<T, byte>(), vb.As<T, byte>()).As<byte, T>();
+            }
+            if (typeof(T) == typeof(short))
+            {
+                return Sse2.Subtract(va.As<T, short>(), vb.As<T, short>()).As<short, T>();
+            }
+            if (typeof(T) == typeof(ushort))
+            {
+                return Sse2.Subtract(va.As<T, ushort>(), vb.As<T, ushort>()).As<ushort, T>();
+            }
+            if (typeof(T) == typeof(int))
+            {
+                return Sse2.Subtract(va.As<T, int>(), vb.As<T, int>()).As<int, T>();
+            }
+            if (typeof(T) == typeof(uint))
+            {
+                return Sse2.Subtract(va.As<T, uint>(), vb.As<T, uint>()).As<uint, T>();
+            }
+            if (typeof(T) == typeof(long))
+            {
+                return Sse2.Subtract(va.As<T, long>(), vb.As<T, long>()).As<long, T>();
+            }
+            if (typeof(T) == typeof(ulong))
+            {
+                return Sse2.Subtract(va.As<T, ulong>(), vb.As<T, ulong>()).As<ulong, T>();
+            }
+            if (typeof(T) == typeof(double))
+            {
+                return Sse2.Subtract(va.As<T, double>(), vb.As<T, double>()).As<double, T>();
+            }
+            if (typeof(T) == typeof(float))
+            {
+                return Sse.Subtract(va.As<T, float>(), vb.As<T, float>()).As<float, T>();
+            }
+
+            throw new NotSupportedException();
+        }
+    }
+}
