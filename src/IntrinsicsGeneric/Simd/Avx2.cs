@@ -8,7 +8,7 @@ namespace IntrinsicsGeneric.Simd
     public abstract class Avx2<T> : Avx<T>
         where T : unmanaged
     {
-        internal Avx2() { }
+        protected Avx2() { }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Add(Vector256<T> va, Vector256<T> vb)

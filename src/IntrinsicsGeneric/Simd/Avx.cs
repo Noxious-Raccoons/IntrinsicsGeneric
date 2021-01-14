@@ -8,6 +8,8 @@ namespace IntrinsicsGeneric.Simd
     public abstract unsafe class Avx<T> : Sse2<T>
         where T : unmanaged
     {
+        protected Avx() { }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> LoadVector256(T* address)
         {

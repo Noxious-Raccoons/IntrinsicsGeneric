@@ -20,7 +20,7 @@ namespace IntrinsicsGeneric.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Sum<T>(Vector256<T> a)
+        public static T Sum<T>(this Vector256<T> a)
             where T : unmanaged
         {
             var sum = default(T);

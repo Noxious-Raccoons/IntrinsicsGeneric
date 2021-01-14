@@ -8,7 +8,7 @@ namespace IntrinsicsGeneric.Simd
     public abstract unsafe class Sse2<T>
         where T : unmanaged
     {
-        internal Sse2(){ }
+        protected Sse2(){ }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> Add(Vector128<T> va, Vector128<T> vb)

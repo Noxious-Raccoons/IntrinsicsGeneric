@@ -8,6 +8,8 @@ namespace IntrinsicsGeneric.Simd
     public abstract class Fma<T> : Avx<T>
         where T : unmanaged
     {
+        protected Fma() { }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Vector128<T> MultiplyAdd(Vector128<T> a, Vector128<T> b, Vector128<T> c)
         {
