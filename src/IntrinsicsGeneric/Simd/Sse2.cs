@@ -3,9 +3,9 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 
-namespace IntrinsicsGeneric
+namespace IntrinsicsGeneric.Simd
 {
-    public abstract class Sse2<T>
+    public abstract unsafe class Sse2<T>
         where T : unmanaged
     {
         internal Sse2(){ }
@@ -105,7 +105,7 @@ namespace IntrinsicsGeneric
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe Vector128<T> LoadVector128(T* address)
+        public static  Vector128<T> LoadVector128(T* address)
         {
             if (typeof(T) == typeof(sbyte))
             {
@@ -152,7 +152,7 @@ namespace IntrinsicsGeneric
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe void Store(T* address, Vector128<T> source)
+        public static void Store(T* address, Vector128<T> source)
         {
             if (typeof(T) == typeof(sbyte))
             {
