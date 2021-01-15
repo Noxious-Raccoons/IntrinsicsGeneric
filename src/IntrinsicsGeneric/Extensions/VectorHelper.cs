@@ -1,10 +1,11 @@
-﻿using System;
+﻿using IntrinsicsGeneric.Simd;
+using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 
 namespace IntrinsicsGeneric.Extensions
 {
-    public class VectorHelper<T>
+    public unsafe class VectorHelper<T>
         where T : unmanaged
     {
         protected VectorHelper() { }
@@ -41,12 +42,13 @@ namespace IntrinsicsGeneric.Extensions
             get
             {
                 var random = new Random();
-                var a1 = random.Next();
-                var a2 = random.Next();
-                var a3 = random.Next();
-                var a4 = random.Next();
+                byte[] bytes = new byte[16];
+                random.NextBytes(bytes);
 
-                return Vector128.Create(a1, a2, a3, a4).As<int, T>();
+                fixed (byte* ptr = bytes)
+                {
+                    return Sse2<byte>.LoadVector128(ptr).As<byte, T>();
+                }
             }
         }
 
@@ -56,16 +58,13 @@ namespace IntrinsicsGeneric.Extensions
             get
             {
                 var random = new Random();
-                var a1 = random.Next();
-                var a2 = random.Next();
-                var a3 = random.Next();
-                var a4 = random.Next();
-                var a5 = random.Next();
-                var a6 = random.Next();
-                var a7 = random.Next();
-                var a8 = random.Next();
+                byte[] bytes = new byte[32];
+                random.NextBytes(bytes);
 
-                return Vector256.Create(a1, a2, a3, a4, a5, a6, a7, a8).As<int, T>();
+                fixed (byte* ptr = bytes)
+                {
+                    return Avx2<byte>.LoadVector256(ptr).As<byte, T>();
+                }
             }
         }
     }
