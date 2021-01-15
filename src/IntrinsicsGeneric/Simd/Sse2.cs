@@ -158,44 +158,43 @@ namespace IntrinsicsGeneric.Simd
             {
                 Sse2.Store((sbyte*) address, source.As<T, sbyte>());
             }
-            if (typeof(T) == typeof(byte))
+            else if (typeof(T) == typeof(byte))
             {
                 Sse2.Store((byte*) address, source.As<T, byte>());
             }
-            if (typeof(T) == typeof(short))
+            else if (typeof(T) == typeof(short))
             {
                 Sse2.Store((short*) address, source.As<T, short>());
             }
-            if (typeof(T) == typeof(ushort))
+            else if (typeof(T) == typeof(ushort))
             {
                 Sse2.Store((ushort*) address, source.As<T, ushort>());
             }
-            if (typeof(T) == typeof(int))
+            else if (typeof(T) == typeof(int))
             {
                 Sse2.Store((int*) address, source.As<T, int>());
             }
-            if (typeof(T) == typeof(uint))
+            else if (typeof(T) == typeof(uint))
             {
                 Sse2.Store((uint*) address, source.As<T, uint>());
             }
-            if (typeof(T) == typeof(long))
+            else if (typeof(T) == typeof(long))
             {
                 Sse2.Store((long*) address, source.As<T, long>());
             }
-            if (typeof(T) == typeof(ulong))
+            else if (typeof(T) == typeof(ulong))
             {
                 Sse2.Store((ulong*) address, source.As<T, ulong>());
             }
-            if (typeof(T) == typeof(double))
+            else if (typeof(T) == typeof(double))
             {
                 Sse2.Store((double*) address, source.As<T, double>());
             }
-            if (typeof(T) == typeof(float))
+            else if (typeof(T) == typeof(float))
             {
                 Sse.Store((float*) address, source.As<T, float>());
             }
-            
-            throw new NotSupportedException();
+            else throw new NotSupportedException();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
