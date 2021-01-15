@@ -7,6 +7,14 @@ namespace IntrinsicsGeneric.UnitTests.Simd
     [TestFixture]
     public class Sse2
     {
+        public Sse2()
+        {
+            if (!System.Runtime.Intrinsics.X86.Sse2.IsSupported)
+            {
+                Assert.Inconclusive("Sse2 is not supported");
+            }
+        }
+
         #region Add
 
         [TestCase(1, 2)]
@@ -158,20 +166,20 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         [Test]
         public void LoadVector128()
         {
-            LoadVector128(new byte[] {15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37});
-            LoadVector128(new sbyte[] {15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37});
+            LoadVector128(new byte[] { 15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37 });
+            LoadVector128(new sbyte[] { 15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37 });
 
-            LoadVector128(new ushort[] {15, 75, 42, 37, 15, 75, 42, 37});
-            LoadVector128(new short[] {15, -75, 42, 37, 15, -75, 42, 37});
+            LoadVector128(new ushort[] { 15, 75, 42, 37, 15, 75, 42, 37 });
+            LoadVector128(new short[] { 15, -75, 42, 37, 15, -75, 42, 37 });
 
-            LoadVector128(new uint[]{15, 75, 42, 37});
-            LoadVector128(new int[] {15, -75, 42, 37});
+            LoadVector128(new uint[] { 15, 75, 42, 37 });
+            LoadVector128(new int[] { 15, -75, 42, 37 });
 
-            LoadVector128(new ulong[]{42, 37});
-            LoadVector128(new long[]{42, -37});
+            LoadVector128(new ulong[] { 42, 37 });
+            LoadVector128(new long[] { 42, -37 });
 
-            LoadVector128(new float[]{15, 75, 42, 37});
-            LoadVector128(new double[]{42, 37});
+            LoadVector128(new float[] { 15, 75, 42, 37 });
+            LoadVector128(new double[] { 42, 37 });
         }
 
         private unsafe void LoadVector128<T>(T[] arr)
@@ -195,20 +203,20 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         [Test]
         public void Store()
         {
-            Store(new byte[] {15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37});
-            Store(new sbyte[] {15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37});
+            Store(new byte[] { 15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37 });
+            Store(new sbyte[] { 15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37 });
 
-            Store(new ushort[] {15, 75, 42, 37, 15, 75, 42, 37});
-            Store(new short[] {15, -75, 42, 37, 15, -75, 42, 37});
+            Store(new ushort[] { 15, 75, 42, 37, 15, 75, 42, 37 });
+            Store(new short[] { 15, -75, 42, 37, 15, -75, 42, 37 });
 
-            Store(new uint[]{15, 75, 42, 37});
-            Store(new int[] {15, -75, 42, 37});
+            Store(new uint[] { 15, 75, 42, 37 });
+            Store(new int[] { 15, -75, 42, 37 });
 
-            Store(new ulong[]{42, 37});
-            Store(new long[]{42, -37});
+            Store(new ulong[] { 42, 37 });
+            Store(new long[] { 42, -37 });
 
-            Store(new float[]{15, 75, 42, 37});
-            Store(new double[]{42, 37});
+            Store(new float[] { 15, 75, 42, 37 });
+            Store(new double[] { 42, 37 });
         }
 
         private unsafe void Store<T>(T[] arr)
@@ -229,7 +237,7 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         }
 
         #endregion
-        
+
         #region Subtract
 
         [TestCase(1, 0)]
