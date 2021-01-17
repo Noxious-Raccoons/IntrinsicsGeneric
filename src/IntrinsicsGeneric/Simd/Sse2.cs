@@ -8,7 +8,7 @@ namespace IntrinsicsGeneric.Simd
     public abstract unsafe class Sse2<T>
         where T : unmanaged
     {
-        protected Sse2(){ }
+        protected Sse2() { }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> Add(Vector128<T> va, Vector128<T> vb)
@@ -100,52 +100,52 @@ namespace IntrinsicsGeneric.Simd
             {
                 return Sse.And(va.As<T, float>(), vb.As<T, float>()).As<float, T>();
             }
-            
+
             throw new NotSupportedException();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static  Vector128<T> LoadVector128(T* address)
+        public static Vector128<T> LoadVector128(T* address)
         {
             if (typeof(T) == typeof(sbyte))
             {
-                return Sse2.LoadVector128((sbyte*) address).As<sbyte, T>();
+                return Sse2.LoadVector128((sbyte*)address).As<sbyte, T>();
             }
             if (typeof(T) == typeof(byte))
             {
-                return Sse2.LoadVector128((byte*) address).As<byte, T>();
+                return Sse2.LoadVector128((byte*)address).As<byte, T>();
             }
             if (typeof(T) == typeof(short))
             {
-                return Sse2.LoadVector128((short*) address).As<short, T>();
+                return Sse2.LoadVector128((short*)address).As<short, T>();
             }
             if (typeof(T) == typeof(ushort))
             {
-                return Sse2.LoadVector128((ushort*) address).As<ushort, T>();
+                return Sse2.LoadVector128((ushort*)address).As<ushort, T>();
             }
             if (typeof(T) == typeof(int))
             {
-                return Sse2.LoadVector128((int*) address).As<int, T>();
+                return Sse2.LoadVector128((int*)address).As<int, T>();
             }
             if (typeof(T) == typeof(uint))
             {
-                return Sse2.LoadVector128((uint*) address).As<uint, T>();
+                return Sse2.LoadVector128((uint*)address).As<uint, T>();
             }
             if (typeof(T) == typeof(long))
             {
-                return Sse2.LoadVector128((long*) address).As<long, T>();
+                return Sse2.LoadVector128((long*)address).As<long, T>();
             }
             if (typeof(T) == typeof(ulong))
             {
-                return Sse2.LoadVector128((ulong*) address).As<ulong, T>();
+                return Sse2.LoadVector128((ulong*)address).As<ulong, T>();
             }
             if (typeof(T) == typeof(double))
             {
-                return Sse2.LoadVector128((double*) address).As<double, T>();
+                return Sse2.LoadVector128((double*)address).As<double, T>();
             }
             if (typeof(T) == typeof(float))
             {
-                return Sse.LoadVector128((float*) address).As<float, T>();
+                return Sse.LoadVector128((float*)address).As<float, T>();
             }
 
             throw new NotSupportedException();
@@ -156,45 +156,48 @@ namespace IntrinsicsGeneric.Simd
         {
             if (typeof(T) == typeof(sbyte))
             {
-                Sse2.Store((sbyte*) address, source.As<T, sbyte>());
+                Sse2.Store((sbyte*)address, source.As<T, sbyte>());
             }
             else if (typeof(T) == typeof(byte))
             {
-                Sse2.Store((byte*) address, source.As<T, byte>());
+                Sse2.Store((byte*)address, source.As<T, byte>());
             }
             else if (typeof(T) == typeof(short))
             {
-                Sse2.Store((short*) address, source.As<T, short>());
+                Sse2.Store((short*)address, source.As<T, short>());
             }
             else if (typeof(T) == typeof(ushort))
             {
-                Sse2.Store((ushort*) address, source.As<T, ushort>());
+                Sse2.Store((ushort*)address, source.As<T, ushort>());
             }
             else if (typeof(T) == typeof(int))
             {
-                Sse2.Store((int*) address, source.As<T, int>());
+                Sse2.Store((int*)address, source.As<T, int>());
             }
             else if (typeof(T) == typeof(uint))
             {
-                Sse2.Store((uint*) address, source.As<T, uint>());
+                Sse2.Store((uint*)address, source.As<T, uint>());
             }
             else if (typeof(T) == typeof(long))
             {
-                Sse2.Store((long*) address, source.As<T, long>());
+                Sse2.Store((long*)address, source.As<T, long>());
             }
             else if (typeof(T) == typeof(ulong))
             {
-                Sse2.Store((ulong*) address, source.As<T, ulong>());
+                Sse2.Store((ulong*)address, source.As<T, ulong>());
             }
             else if (typeof(T) == typeof(double))
             {
-                Sse2.Store((double*) address, source.As<T, double>());
+                Sse2.Store((double*)address, source.As<T, double>());
             }
             else if (typeof(T) == typeof(float))
             {
-                Sse.Store((float*) address, source.As<T, float>());
+                Sse.Store((float*)address, source.As<T, float>());
             }
-            else throw new NotSupportedException();
+            else
+            {
+                throw new NotSupportedException();
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
