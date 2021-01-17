@@ -166,7 +166,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             Assert.IsFalse(Contains256<double>(new double[] { 42, 37, 42, 37.98 }, 37.9));
         }
 
-        private unsafe bool Contains256<T>(T[] array, T value)
+        private bool Contains256<T>(T[] array, T value)
             where T : unmanaged
         {
             return new Vector<T>(array).AsVector256().Contains(value);

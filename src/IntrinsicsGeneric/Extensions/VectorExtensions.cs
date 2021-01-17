@@ -2,10 +2,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
+#if NETCOREAPP3_1
+using System.Diagnostics;
+using System.Numerics;
+#endif
+
 
 namespace IntrinsicsGeneric.Extensions
 {
