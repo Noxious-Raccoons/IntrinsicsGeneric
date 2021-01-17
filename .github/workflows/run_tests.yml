@@ -20,7 +20,7 @@ jobs:
         config:
           - os: windows-latest
           - os: ubuntu-latest
-          - os: macos-latest
+          - os: macos-11.0
 
     name: Run tests
     steps:
