@@ -1,4 +1,5 @@
-﻿using IntrinsicsGeneric.Simd;
+﻿using IntrinsicsGeneric.Extensions;
+using IntrinsicsGeneric.Simd;
 using NUnit.Framework;
 using System.Runtime.Intrinsics;
 
@@ -94,7 +95,7 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         {
             Assert.AreEqual(Vector256<T>.Count, arr.Length);
 
-            var vector = Simd<T>.CreateVector256(default);
+            var vector = VectorHelper<T>.CreateVector256(default);
             fixed (T* ptr = arr)
             {
                 Avx<T>.Store(ptr, vector);

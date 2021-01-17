@@ -1,4 +1,5 @@
-﻿using IntrinsicsGeneric.Simd;
+﻿using IntrinsicsGeneric.Extensions;
+using IntrinsicsGeneric.Simd;
 using NUnit.Framework;
 using System.Runtime.Intrinsics;
 
@@ -30,8 +31,8 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         public void Add<T>(T value, T expected)
             where T : unmanaged
         {
-            var vector = Simd<T>.CreateVector256(value);
-            var expectedVector = Simd<T>.CreateVector256(expected);
+            var vector = VectorHelper<T>.CreateVector256(value);
+            var expectedVector = VectorHelper<T>.CreateVector256(expected);
 
             var result = Avx2<T>.Add(vector, vector);
 
@@ -51,9 +52,9 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         public void Add<T>(T a, T b, T expected)
             where T : unmanaged
         {
-            var vectorA = Simd<T>.CreateVector256(a);
-            var vectorB = Simd<T>.CreateVector256(b);
-            var expectedVector = Simd<T>.CreateVector256(expected);
+            var vectorA = VectorHelper<T>.CreateVector256(a);
+            var vectorB = VectorHelper<T>.CreateVector256(b);
+            var expectedVector = VectorHelper<T>.CreateVector256(expected);
 
             var result = Avx2<T>.Add(vectorA, vectorB);
 
@@ -125,10 +126,10 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         public void And<T>(T a, T b, T expected)
             where T : unmanaged
         {
-            var vectorA = Simd<T>.CreateVector256(a);
-            var vectorB = Simd<T>.CreateVector256(b);
+            var vectorA = VectorHelper<T>.CreateVector256(a);
+            var vectorB = VectorHelper<T>.CreateVector256(b);
 
-            var expectedVector = Simd<T>.CreateVector256(expected);
+            var expectedVector = VectorHelper<T>.CreateVector256(expected);
 
             var result = Avx2<T>.And(vectorA, vectorB);
 
@@ -176,8 +177,8 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         public void Subtract<T>(T value, T expected)
             where T : unmanaged
         {
-            var vector = Simd<T>.CreateVector256(value);
-            var expectedVector = Simd<T>.CreateVector256(expected);
+            var vector = VectorHelper<T>.CreateVector256(value);
+            var expectedVector = VectorHelper<T>.CreateVector256(expected);
 
             var result = Avx2<T>.Subtract(vector, vector);
 
@@ -197,9 +198,9 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         public void Subtract<T>(T a, T b, T expected)
             where T : unmanaged
         {
-            var vectorA = Simd<T>.CreateVector256(a);
-            var vectorB = Simd<T>.CreateVector256(b);
-            var expectedVector = Simd<T>.CreateVector256(expected);
+            var vectorA = VectorHelper<T>.CreateVector256(a);
+            var vectorB = VectorHelper<T>.CreateVector256(b);
+            var expectedVector = VectorHelper<T>.CreateVector256(expected);
 
             var result = Avx2<T>.Subtract(vectorA, vectorB);
 

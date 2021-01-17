@@ -30,5 +30,31 @@ namespace IntrinsicsGeneric.Extensions
             }
             return sum;
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Contains<T>(this Vector128<T> vector, T value)
+            where T : unmanaged
+        {
+            bool result = false;
+            for (var i = 0; i < Vector128<T>.Count && !result; i++)
+            {
+                result = vector.GetElement(i).Equals(value);
+            }
+
+            return result;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Contains<T>(this Vector256<T> vector, T value)
+            where T : unmanaged
+        {
+            bool result = false;
+            for (var i = 0; i < Vector256<T>.Count && !result; i++)
+            {
+                result = vector.GetElement(i).Equals(value);
+            }
+
+            return result;
+        }
     }
 }
