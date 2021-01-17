@@ -5,13 +5,13 @@ using System.Runtime.Intrinsics;
 namespace IntrinsicsGeneric.UnitTests.Simd
 {
     [TestFixture]
-    public class Sse2
+    public class Avx2
     {
-        public Sse2()
+        public Avx2()
         {
-            if (!System.Runtime.Intrinsics.X86.Sse2.IsSupported)
+            if (!System.Runtime.Intrinsics.X86.Avx2.IsSupported)
             {
-                Assert.Inconclusive("Sse2 is not supported");
+                Assert.Inconclusive("Avx2 is not supported");
             }
         }
 
@@ -30,10 +30,10 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         public void Add<T>(T value, T expected)
             where T : unmanaged
         {
-            var vector = Simd<T>.CreateVector128(value);
-            var expectedVector = Simd<T>.CreateVector128(expected);
+            var vector = Simd<T>.CreateVector256(value);
+            var expectedVector = Simd<T>.CreateVector256(expected);
 
-            var result = Sse2<T>.Add(vector, vector);
+            var result = Avx2<T>.Add(vector, vector);
 
             Assert.AreEqual(expectedVector, result);
         }
@@ -51,11 +51,11 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         public void Add<T>(T a, T b, T expected)
             where T : unmanaged
         {
-            var vectorA = Simd<T>.CreateVector128(a);
-            var vectorB = Simd<T>.CreateVector128(b);
-            var expectedVector = Simd<T>.CreateVector128(expected);
+            var vectorA = Simd<T>.CreateVector256(a);
+            var vectorB = Simd<T>.CreateVector256(b);
+            var expectedVector = Simd<T>.CreateVector256(expected);
 
-            var result = Sse2<T>.Add(vectorA, vectorB);
+            var result = Avx2<T>.Add(vectorA, vectorB);
 
             Assert.AreEqual(expectedVector, result);
         }
@@ -125,12 +125,12 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         public void And<T>(T a, T b, T expected)
             where T : unmanaged
         {
-            var vectorA = Simd<T>.CreateVector128(a);
-            var vectorB = Simd<T>.CreateVector128(b);
+            var vectorA = Simd<T>.CreateVector256(a);
+            var vectorB = Simd<T>.CreateVector256(b);
 
-            var expectedVector = Simd<T>.CreateVector128(expected);
+            var expectedVector = Simd<T>.CreateVector256(expected);
 
-            var result = Sse2<T>.And(vectorA, vectorB);
+            var result = Avx2<T>.And(vectorA, vectorB);
 
             Assert.AreEqual(expectedVector, result);
         }
@@ -138,11 +138,11 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         [Test]
         public void AndFloat_Additional()
         {
-            var vectorA = Vector128.Create(5F);
-            var vectorB = Vector128.Create(10F);
+            var vectorA = Vector256.Create(5F);
+            var vectorB = Vector256.Create(10F);
 
-            var expectedVector = System.Runtime.Intrinsics.X86.Sse.And(vectorA, vectorB);
-            var result = Sse2<float>.And(vectorA, vectorB);
+            var expectedVector = System.Runtime.Intrinsics.X86.Avx.And(vectorA, vectorB);
+            var result = Avx2<float>.And(vectorA, vectorB);
 
             Assert.AreEqual(expectedVector, result);
         }
@@ -150,90 +150,13 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         [Test]
         public void AndDouble_Additional()
         {
-            var vectorA = Vector128.Create(5D);
-            var vectorB = Vector128.Create(10D);
+            var vectorA = Vector256.Create(5D);
+            var vectorB = Vector256.Create(10D);
 
-            var expectedVector = System.Runtime.Intrinsics.X86.Sse2.And(vectorA, vectorB);
-            var result = Sse2<double>.And(vectorA, vectorB);
+            var expectedVector = System.Runtime.Intrinsics.X86.Avx.And(vectorA, vectorB);
+            var result = Avx2<double>.And(vectorA, vectorB);
 
             Assert.AreEqual(expectedVector, result);
-        }
-
-        #endregion
-
-        #region LoadVector128
-
-        [Test]
-        public void LoadVector128()
-        {
-            LoadVector128(new byte[] { 15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37 });
-            LoadVector128(new sbyte[] { 15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37 });
-
-            LoadVector128(new ushort[] { 15, 75, 42, 37, 15, 75, 42, 37 });
-            LoadVector128(new short[] { 15, -75, 42, 37, 15, -75, 42, 37 });
-
-            LoadVector128(new uint[] { 15, 75, 42, 37 });
-            LoadVector128(new int[] { 15, -75, 42, 37 });
-
-            LoadVector128(new ulong[] { 42, 37 });
-            LoadVector128(new long[] { 42, -37 });
-
-            LoadVector128(new float[] { 15, 75, 42, 37 });
-            LoadVector128(new double[] { 42, 37 });
-        }
-
-        private unsafe void LoadVector128<T>(T[] arr)
-            where T : unmanaged
-        {
-            Assert.AreEqual(Vector128<T>.Count, arr.Length);
-            fixed (T* ptr = arr)
-            {
-                var vector = Sse2<T>.LoadVector128(ptr);
-                for (var i = 0; i < Vector128<T>.Count; i++)
-                {
-                    Assert.AreEqual(vector.GetElement(i), arr[i]);
-                }
-            }
-        }
-
-        #endregion
-
-        #region Store
-
-        [Test]
-        public void Store()
-        {
-            Store(new byte[] { 15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37, 15, 75, 42, 37 });
-            Store(new sbyte[] { 15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37, 15, -75, 42, 37 });
-
-            Store(new ushort[] { 15, 75, 42, 37, 15, 75, 42, 37 });
-            Store(new short[] { 15, -75, 42, 37, 15, -75, 42, 37 });
-
-            Store(new uint[] { 15, 75, 42, 37 });
-            Store(new int[] { 15, -75, 42, 37 });
-
-            Store(new ulong[] { 42, 37 });
-            Store(new long[] { 42, -37 });
-
-            Store(new float[] { 15, 75, 42, 37 });
-            Store(new double[] { 42, 37 });
-        }
-
-        private unsafe void Store<T>(T[] arr)
-            where T : unmanaged
-        {
-            Assert.AreEqual(Vector128<T>.Count, arr.Length);
-
-            var vector = Simd<T>.CreateVector128(default);
-            fixed (T* ptr = arr)
-            {
-                Sse2<T>.Store(ptr, vector);
-            }
-
-            for (var i = 0; i < Vector128<T>.Count; i++)
-            {
-                Assert.AreEqual(default(T), arr[i]);
-            }
         }
 
         #endregion
@@ -253,10 +176,10 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         public void Subtract<T>(T value, T expected)
             where T : unmanaged
         {
-            var vector = Simd<T>.CreateVector128(value);
-            var expectedVector = Simd<T>.CreateVector128(expected);
+            var vector = Simd<T>.CreateVector256(value);
+            var expectedVector = Simd<T>.CreateVector256(expected);
 
-            var result = Sse2<T>.Subtract(vector, vector);
+            var result = Avx2<T>.Subtract(vector, vector);
 
             Assert.AreEqual(expectedVector, result);
         }
@@ -274,11 +197,11 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         public void Subtract<T>(T a, T b, T expected)
             where T : unmanaged
         {
-            var vectorA = Simd<T>.CreateVector128(a);
-            var vectorB = Simd<T>.CreateVector128(b);
-            var expectedVector = Simd<T>.CreateVector128(expected);
+            var vectorA = Simd<T>.CreateVector256(a);
+            var vectorB = Simd<T>.CreateVector256(b);
+            var expectedVector = Simd<T>.CreateVector256(expected);
 
-            var result = Sse2<T>.Subtract(vectorA, vectorB);
+            var result = Avx2<T>.Subtract(vectorA, vectorB);
 
             Assert.AreEqual(expectedVector, result);
         }
