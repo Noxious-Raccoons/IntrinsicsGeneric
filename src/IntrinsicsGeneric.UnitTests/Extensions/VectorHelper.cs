@@ -55,7 +55,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         public void AllBitsSet128()
         {
             AllBitsSet128<byte>();
-            
+
             AllBitsSet128<short>();
             AllBitsSet128<ushort>();
 
@@ -85,7 +85,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         public void AllBitsSet256()
         {
             AllBitsSet256<byte>();
-            
+
             AllBitsSet256<short>();
             AllBitsSet256<ushort>();
 
