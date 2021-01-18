@@ -4,11 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
-#if NETCOREAPP3_1
+//#if NETCOREAPP3_1
 using System.Diagnostics;
 using System.Numerics;
-#endif
-
+//#endif
 
 namespace IntrinsicsGeneric.Extensions
 {
@@ -143,7 +142,7 @@ namespace IntrinsicsGeneric.Extensions
             throw new NotSupportedException();
         }
 
-#if NETCOREAPP3_1
+//#if NETCOREAPP3_1
 
         public static Vector128<T> AsVector128<T>(this Vector<T> value)
             where T : struct
@@ -157,10 +156,11 @@ namespace IntrinsicsGeneric.Extensions
         {
             Debug.Assert(Vector256<T>.Count >= Vector<T>.Count);
 
-            Vector256<T> result = default;
-            Unsafe.WriteUnaligned(ref Unsafe.As<Vector256<T>, byte>(ref result), value);
-            return result;
+            //Vector256<T> result = default;
+            //Unsafe.WriteUnaligned(ref Unsafe.As<Vector256<T>, byte>(ref result), value);
+            //return result;
+            return Unsafe.As<Vector<T>, Vector256<T>>(ref value);
         }
-#endif
+//#endif
     }
 }

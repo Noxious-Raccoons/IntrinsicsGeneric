@@ -106,7 +106,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         private bool Contains128<T>(T[] array, T value)
             where T : unmanaged
         {
-            return new Vector<T>(array).AsVector128().Contains(value);
+            return IntrinsicsGeneric.Extensions.VectorExtensions.AsVector128(new Vector<T>(array)).Contains(value);
         }
         #endregion
 
@@ -169,7 +169,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         private bool Contains256<T>(T[] array, T value)
             where T : unmanaged
         {
-            return new Vector<T>(array).AsVector256().Contains(value);
+            return IntrinsicsGeneric.Extensions.VectorExtensions.AsVector256(new Vector<T>(array)).Contains(value);
         }
 
         #endregion
