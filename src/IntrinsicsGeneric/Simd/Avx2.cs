@@ -10,6 +10,22 @@ namespace IntrinsicsGeneric.Simd
     {
         protected Avx2() { }
 
+        /// <para>Synopsis:</para>
+        /// <para>__m256i _mm256_add_epi8 (__m256i a, __m256i b)</para>
+        /// VPADDB ymm, ymm, ymm/m256
+        /// <para>CPUID Flags: AVX2, AVX(float, double)</para>
+        /// <remarks>
+        /// <para>Description:</para>
+        /// Add packed X-bit integers in a and b, and store the results in dst.
+        /// </remarks>
+        /// <code>
+        /// Operation:
+        /// FOR j := 0 to BIT - 1
+        /// >> i := j * VECTOR_SIZE - 1
+        /// >> dst[i+VECTOR_SIZE-1:i]] := a[i+VECTOR_SIZE-1:i] + b[i+VECTOR_SIZE-1:i]]
+        /// ENDFOR
+        /// dst[MAX:256] := 0
+        /// </code>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Add(Vector256<T> va, Vector256<T> vb)
         {
@@ -57,6 +73,19 @@ namespace IntrinsicsGeneric.Simd
             throw new NotSupportedException();
         }
 
+        /// <para>Synopsis:</para>
+        /// __m256i _mm256_and_si256 (__m256i a, __m256i b)
+        /// <para>VPAND ymm, ymm, ymm/m256</para>
+        /// <para>CPUID Flags: AVX2, AVX(float, double)</para>
+        /// <remarks>
+        /// <para>Description:</para>
+        /// Compute the bitwise AND of 256 bits (representing integer data) in a and b, and store the result in dst.
+        /// </remarks>
+        /// <code>
+        /// Operation:
+        /// dst[255:0] := (a[255:0] AND b[255:0])
+        /// dst[MAX:256] := 0
+        /// </code>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> And(Vector256<T> va, Vector256<T> vb)
         {
@@ -104,6 +133,21 @@ namespace IntrinsicsGeneric.Simd
             throw new NotSupportedException();
         }
 
+        /// <para>Synopsis:</para>
+        /// __m256i _mm256_sub_epi8 (__m256i a, __m256i b)
+        /// <para>VPAND ymm, ymm, ymm/m256</para>
+        /// <para>CPUID Flags: AVX2, AVX(float, double)</para>
+        /// <remarks>
+        /// <para>Description:</para>
+        /// Subtract packed 8-bit integers in b from packed 8-bit integers in a, and store the results in dst.
+        /// </remarks>
+        /// <code>
+        /// FOR j := 0 to BIT - 1
+        /// >> i := j * i + VECTOR_SIZE - 1
+        /// >> dst[i+VECTOR_SIZE-1:i] := a[i+VECTOR_SIZE-1:i] - b[i+VECTOR_SIZE-1:i]
+        /// ENDFOR
+        /// dst[MAX:256] := 0
+        /// </code>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Subtract(Vector256<T> va, Vector256<T> vb)
         {

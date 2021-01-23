@@ -10,6 +10,21 @@ namespace IntrinsicsGeneric.Simd
     {
         protected Sse2() { }
 
+        /// <para>Synopsis:</para>
+        /// <para>__m128i _mm_add_epi8 (__m128i a, __m128i b)</para>
+        /// PADDB xmm, xmm/m128
+        /// <para>CPUID Flags: SSE2</para>
+        /// <remarks>
+        /// <para>Description:</para>
+        /// Add packed 8-bit integers in a and b, and store the results in dst.
+        /// </remarks>
+        /// <code>
+        /// Operation:
+        /// FOR j := 0 to 15
+        /// >> i := j*8
+        /// >> dst[i+7:i] := a[i+7:i] + b[i+7:i]
+        /// ENDFOR
+        /// </code>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> Add(Vector128<T> va, Vector128<T> vb)
         {
@@ -57,6 +72,18 @@ namespace IntrinsicsGeneric.Simd
             throw new NotSupportedException();
         }
 
+        /// <para>Synopsis:</para>
+        /// <para>__m128i _mm_add_epi8 (__m128i a, __m128i b)</para>
+        /// PAND xmm, xmm/m128
+        /// <para>CPUID Flags: SSE2</para>
+        /// <remarks>
+        /// <para>Description:</para>
+        /// Compute the bitwise AND of 128 bits (representing integer data) in a and b, and store the result in dst.
+        /// </remarks>
+        /// <code>
+        /// Operation:
+        /// dst[127:0] := (a[127:0] AND b[127:0])
+        /// </code>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> And(Vector128<T> va, Vector128<T> vb)
         {
@@ -104,6 +131,18 @@ namespace IntrinsicsGeneric.Simd
             throw new NotSupportedException();
         }
 
+        /// <para>Synopsis:</para>
+        /// <para>__m128i _mm_loadu_si128 (__m128i const* mem_addr)</para>
+        /// PMOVDQU xmm, m128
+        /// <para>CPUID Flags: SSE2</para>
+        /// <remarks>
+        /// <para>Description:</para>
+        /// Load 128-bits of integer data from memory into dst. mem_addr does not need to be aligned on any particular boundary.
+        /// </remarks>
+        /// <code>
+        /// Operation:
+        /// dst[127:0] := MEM[mem_addr+127:mem_addr]
+        /// </code>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> LoadVector128(T* address)
         {
@@ -151,6 +190,18 @@ namespace IntrinsicsGeneric.Simd
             throw new NotSupportedException();
         }
 
+        /// <para>Synopsis:</para>
+        /// <para>void _mm_storeu_si128 (__m128i* mem_addr, __m128i a)</para>
+        /// MOVDQU m128, xmm
+        /// <para>CPUID Flags: SSE2</para>
+        /// <remarks>
+        /// <para>Description:</para>
+        /// Store 128-bits of integer data from a into memory. mem_addr does not need to be aligned on any particular boundary.
+        /// </remarks>
+        /// <code>
+        /// Operation:
+        /// MEM[mem_addr+127:mem_addr] := a[127:0]
+        /// </code>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Store(T* address, Vector128<T> source)
         {
@@ -200,6 +251,21 @@ namespace IntrinsicsGeneric.Simd
             }
         }
 
+        /// <para>Synopsis:</para>
+        /// <para>__m128i _mm_sub_epi8 (__m128i a, __m128i b)</para>
+        /// PSUBB xmm, xmm/m128
+        /// <para>CPUID Flags: SSE2</para>
+        /// <remarks>
+        /// <para>Description:</para>
+        /// Subtract packed X-bit integers in a and b, and store the results in dst.
+        /// </remarks>
+        /// <code>
+        /// Operation:
+        /// FOR j := 0 to 15
+        /// >> i := j*8
+        /// >> dst[i+7:i] := a[i+7:i] - b[i+7:i]
+        /// ENDFOR
+        /// </code>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> Subtract(Vector128<T> va, Vector128<T> vb)
         {
