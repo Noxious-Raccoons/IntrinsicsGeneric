@@ -139,7 +139,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             Assert.IsTrue(Contains256<double>(new double[] { 42, 37, 42, 37.98 }, 37.98));
         }
 
-        [Test]
+        //[Test]
         public void MacTestContains_True()
         {
             var x = Vector256.Create(
