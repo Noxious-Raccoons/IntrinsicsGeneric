@@ -112,7 +112,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
 
         #region Contains256
 
-        [Test]
+        // [Test]
         public void Contains256_True()
         {
             Assert.IsTrue(Contains256<byte>(new byte[]
@@ -140,6 +140,16 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         }
 
         [Test]
+        public void MacTestContains_True()
+        {
+            var x = Vector256.Create(
+                15, -75, 42, 37, 79, 67, 7, 120, 15, -75, 42, 37, 79, 67, 7, 120,
+                15, -75, 42, 37, 79, 67, 7, 120, 15, -75, 42, -37, 79, 67, 7, 120);
+
+            Assert.IsTrue(x.Contains((sbyte)-37));
+        }
+
+        // [Test]
         public void Contains256_False()
         {
             Assert.IsFalse(Contains256<byte>(new byte[]
