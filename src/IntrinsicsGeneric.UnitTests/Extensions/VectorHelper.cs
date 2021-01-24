@@ -1,8 +1,11 @@
 ﻿using IntrinsicsGeneric.Extensions;
 using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 
 namespace IntrinsicsGeneric.UnitTests.Extensions
 {
@@ -84,20 +87,43 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         [Test]
         public void AllBitsSet256()
         {
-            AllBitsSet256<byte>();
+            if (Avx.IsSupported)
+            {
 
-            AllBitsSet256<short>();
-            AllBitsSet256<ushort>();
+                AllBitsSet256<byte>();
 
-            AllBitsSet256<int>();
-            AllBitsSet256<uint>();
+                AllBitsSet256<short>();
+                AllBitsSet256<ushort>();
 
-            AllBitsSet256<long>();
-            AllBitsSet256<ulong>();
+                AllBitsSet256<int>();
+                AllBitsSet256<uint>();
 
-            AllBitsSet256<float>();
-            AllBitsSet256<double>();
+                AllBitsSet256<long>();
+                AllBitsSet256<ulong>();
+
+                AllBitsSet256<float>();
+                AllBitsSet256<double>();
+            }
+            Assert.IsTrue(true);
         }
+        
+        //[Test]
+        /*public void AllBitsSet256X()
+        {
+            var bytes = new List<byte>(sizeof(byte) * Vector256<byte>.Count);
+            var vector = Vector256<byte>.AllBitsSet;
+            
+            for (int i = 0; i < Vector256<byte>.Count; i++)
+            {
+                var element = vector.GetElement(i);
+                bytes.AddRange(new[] {Unsafe.As<byte, byte>(ref element)});
+            }
+
+            var actual = new BitArray(bytes.ToArray());
+            
+            Assert.IsTrue(actual.Cast<bool>().All(b => b));
+        }
+        */
 
         private static void AllBitsSet256<T>()
             where T : unmanaged
