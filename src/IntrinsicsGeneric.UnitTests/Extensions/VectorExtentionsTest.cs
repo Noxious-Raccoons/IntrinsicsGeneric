@@ -86,7 +86,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             Assert.IsTrue(VectorExtensions.Contains<double>(new double[] { 42, 37, 42, 37.98 }, 37.98));
         }
         
-        //[Test]
+        [Test]
         public void Contains_False()
         {
             Assert.IsFalse(VectorExtensions.Contains<byte>(new byte[]
