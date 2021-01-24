@@ -119,7 +119,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             for (int i = 0; i < Vector256<byte>.Count; i++)
             {
                 var element = vector.GetElement(i);
-                bytes.AddRange(new[] {ref element});
+                bytes.AddRange(new[] { Unsafe.As<byte, byte>(ref element) });
             }
 
             var actual = new BitArray(bytes.ToArray());
