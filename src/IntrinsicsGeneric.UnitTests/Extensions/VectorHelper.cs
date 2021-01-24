@@ -30,9 +30,9 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             Assert.AreEqual(Vector128.Create(value), VectorHelper<double>.CreateVector128(value));
         }
 
-        //[TestCase(115.3)]
-        //[TestCase(-5)]
-        //[TestCase(300)]
+        [TestCase(115.3)]
+        [TestCase(-5)]
+        [TestCase(300)]
         public void CreateVector256(double value)
         {
             Assert.AreEqual(Vector256.Create((sbyte)value), VectorHelper<sbyte>.CreateVector256((sbyte)value));
