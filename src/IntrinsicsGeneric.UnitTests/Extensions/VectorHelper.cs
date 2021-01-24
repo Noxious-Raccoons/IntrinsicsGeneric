@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
@@ -104,7 +105,8 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
                 AllBitsSet256<float>();
                 AllBitsSet256<double>();
             }
-            Assert.IsTrue(true);
+            TestContext.Write("Avx is supported: " + Avx.IsSupported);
+            Assert.IsTrue(false);
         }
         
         //[Test]
