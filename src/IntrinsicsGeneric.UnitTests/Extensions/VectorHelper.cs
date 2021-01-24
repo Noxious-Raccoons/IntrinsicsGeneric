@@ -81,7 +81,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             Assert.AreEqual(expected, actual);
         }
 
-        //[Test]
+        [Test]
         public void AllBitsSet256()
         {
             AllBitsSet256<byte>();
