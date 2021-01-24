@@ -2,6 +2,7 @@ using IntrinsicsGeneric.Extensions;
 using NUnit.Framework;
 using System.Numerics;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using IntrinsicsGeneric.Simd;
 
 namespace IntrinsicsGeneric.UnitTests.Extensions
@@ -53,6 +54,13 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         [Test]
         public void Contains_True()
         {
+            TestContext.Write(Avx2.IsSupported);
+            TestContext.Write(Avx.IsSupported);
+            TestContext.Write(Sse41.IsSupported);
+            TestContext.Write(Ssse3.IsSupported);
+            TestContext.Write(Sse3.IsSupported);
+            TestContext.Write(Sse2.IsSupported);
+            TestContext.Write(Sse.IsSupported);
             Assert.IsTrue(VectorExtensions.Contains<byte>(new byte[]
             {
                 15, 75, 42, 37, 79, 67, 7, 120, 15, 75, 42, 37, 79, 67, 7, 120,
