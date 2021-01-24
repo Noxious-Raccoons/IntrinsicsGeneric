@@ -87,7 +87,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         [Test]
         public void AllBitsSet256()
         {
-            if (Avx.IsSupported)
+            if (Avx2.IsSupported)
             {
 
                 AllBitsSet256<byte>();
