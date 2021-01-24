@@ -125,8 +125,8 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             var actual = new BitArray(bytes.ToArray());
             
             // Assert
-            Assert.IsTrue(actual.Cast<bool>().All(b => b));
-            //Assert.AreEqual(expected, actual);
+            //Assert.IsTrue(actual.Cast<bool>().All(b => b));
+            Assert.AreEqual(expected, actual);
         }
 #endif
 
