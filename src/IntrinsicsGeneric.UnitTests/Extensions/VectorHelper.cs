@@ -113,10 +113,11 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             expected.SetAll(true);
             
             var bytes = new List<byte>(sizeof(byte) * Vector256<byte>.Count);
-
+            var vector = Vector256<byte>.AllBitsSet;
+            
             // Act
             byte element = 0;
-            bytes.AddRange(new[] { ref element });
+            bytes.AddRange(new[] { Unsafe.As<byte, byte>(ref element) });
         }
 #endif
 
