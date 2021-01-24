@@ -112,7 +112,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             var expected = new BitArray(256);
             expected.SetAll(true);
             
-            var bytes = new List<byte>(sizeof(byte) * Vector256<byte>.Count);
+            var bytes = new List<byte>(Unsafe.SizeOf<byte>() * Vector256<byte>.Count);
             var vector = Vector256<byte>.AllBitsSet;
             
             // Act
