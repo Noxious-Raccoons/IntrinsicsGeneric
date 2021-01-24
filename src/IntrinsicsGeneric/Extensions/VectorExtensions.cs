@@ -7,6 +7,8 @@ using System.Runtime.Intrinsics;
 //#if NETCOREAPP3_1
 using System.Diagnostics;
 using System.Numerics;
+using IntrinsicsGeneric.Simd;
+
 //#endif
 
 namespace IntrinsicsGeneric.Extensions
@@ -50,8 +52,49 @@ namespace IntrinsicsGeneric.Extensions
 
             return result;
         }
-
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe bool Contains<T>(T[] array, T value)
+            where T : unmanaged
+        {
+            if (array.Length < 1)
+            {
+                return false;
+            }
+            
+            fixed (T* ptr = array)
+            {
+                var i = 0;
+                var size = Vector256<T>.Count;
+                var lastIndexBlock = array.Length - array.Length % size;
+                
+                var elementVec = VectorHelper<T>.CreateVector256(value);
+                
+                for (; i < lastIndexBlock; i += size)
+                {
+                    var curr = Avx<T>.LoadVector256(ptr + i);
+                    var mask = Avx2<T>.CompareEqual(curr, elementVec);
+                    
+                    if (!Avx<T>.TestZ(mask, mask))
+                    {
+                        return true;
+                    }
+                }
+                
+                
+                var comparer = Comparer<T>.Default;
+                
+                for (; i < array.Length; i++)
+                {
+                    if (comparer.Compare(array[i], value) == 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
         public static bool Contains<T>(this Vector256<T> vector, T value)
             where T : unmanaged
         {

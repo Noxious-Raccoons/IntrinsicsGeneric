@@ -2,10 +2,11 @@ using IntrinsicsGeneric.Extensions;
 using NUnit.Framework;
 using System.Numerics;
 using System.Runtime.Intrinsics;
+using IntrinsicsGeneric.Simd;
 
 namespace IntrinsicsGeneric.UnitTests.Extensions
 {
-    public class VectorExtensions
+    public class VectorExtensionsTest
     {
         [TestCase(1, 4)]
         [TestCase(1U, 4U)]
@@ -49,7 +50,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
 
         #region Contains128
 
-        [Test]
+        //[Test]
         public void Contains128_True()
         {
             Assert.IsTrue(Contains128<byte>(new byte[]
@@ -76,7 +77,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             Assert.IsTrue(Contains128<double>(new double[] { 42, 37.98, 0, 0 }, 37.98));
         }
 
-        [Test]
+        //[Test]
         public void Contains128_False()
         {
             Assert.IsFalse(Contains128<byte>(new byte[]
@@ -112,44 +113,35 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
 
         #region Contains256
 
-        // [Test]
+        [Test]
         public void Contains256_True()
         {
-            Assert.IsTrue(Contains256<byte>(new byte[]
+            Assert.IsTrue(VectorExtensions.Contains<byte>(new byte[]
             {
                 15, 75, 42, 37, 79, 67, 7, 120, 15, 75, 42, 37, 79, 67, 7, 120,
                 15, 75, 42, 37, 79, 67, 7, 120, 15, 75, 42, 137, 79, 67, 7, 120
             }, 137));
-            Assert.IsTrue(Contains256<sbyte>(new sbyte[]
+            
+            Assert.IsTrue(VectorExtensions.Contains<sbyte>(new sbyte[]
             {
                 15, -75, 42, 37, 79, 67, 7, 120, 15, -75, 42, 37, 79, 67, 7, 120,
                 15, -75, 42, 37, 79, 67, 7, 120, 15, -75, 42, -37, 79, 67, 7, 120
             }, -37));
 
-            Assert.IsTrue(Contains256<ushort>(new ushort[] { 15, 75, 42, 37, 79, 67, 7, 120, 15, 75, 42, 37, 79, 67, 7, 20 }, 20));
-            Assert.IsTrue(Contains256<short>(new short[] { 15, -75, 42, 37, 79, 67, 7, -20, 15, -75, 42, 37, 79, 67, 7, 120 }, -20));
+            Assert.IsTrue(VectorExtensions.Contains<ushort>(new ushort[] { 15, 75, 42, 37, 79, 67, 7, 120, 15, 75, 42, 37, 79, 67, 7, 20 }, 20));
+            Assert.IsTrue(VectorExtensions.Contains<short>(new short[] { 15, -75, 42, 37, 79, 67, 7, -20, 15, -75, 42, 37, 79, 67, 7, 120 }, -20));
 
-            Assert.IsTrue(Contains256<uint>(new uint[] { 15, 75, 42, 37, 79, 67, 7, 120 }, 79));
-            Assert.IsTrue(Contains256<int>(new int[] { 15, -75, 42, 37, 79, 67, 7, 120 }, 79));
+            Assert.IsTrue(VectorExtensions.Contains<uint>(new uint[] { 15, 75, 42, 37, 79, 67, 7, 120 }, 79));
+            Assert.IsTrue(VectorExtensions.Contains<int>(new int[] { 15, -75, 42, 37, 79, 67, 7, 120 }, 79));
 
-            Assert.IsTrue(Contains256<ulong>(new ulong[] { 42, 37, 7, 120 }, 7));
-            Assert.IsTrue(Contains256<long>(new long[] { 42, -37, 7, 120 }, 7));
+            Assert.IsTrue(VectorExtensions.Contains<ulong>(new ulong[] { 42, 37, 7, 120 }, 7));
+            Assert.IsTrue(VectorExtensions.Contains<long>(new long[] { 42, -37, 7, 120 }, 7));
 
-            Assert.IsTrue(Contains256<float>(new float[] { 15, 75, 42, 37, 79, 67.9f, 7, 120 }, 67.9f));
-            Assert.IsTrue(Contains256<double>(new double[] { 42, 37, 42, 37.98 }, 37.98));
+            Assert.IsTrue(VectorExtensions.Contains<float>(new float[] { 15, 75, 42, 37, 79, 67.9f, 7, 120 }, 67.9f));
+            Assert.IsTrue(VectorExtensions.Contains<double>(new double[] { 42, 37, 42, 37.98 }, 37.98));
         }
-
+        
         //[Test]
-        public void MacTestContains_True()
-        {
-            var x = Vector256.Create(
-                15, -75, 42, 37, 79, 67, 7, 120, 15, -75, 42, 37, 79, 67, 7, 120,
-                15, -75, 42, 37, 79, 67, 7, 120, 15, -75, 42, -37, 79, 67, 7, 120);
-
-            Assert.IsTrue(x.Contains((sbyte)-37));
-        }
-
-        // [Test]
         public void Contains256_False()
         {
             Assert.IsFalse(Contains256<byte>(new byte[]

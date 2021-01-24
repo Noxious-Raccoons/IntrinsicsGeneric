@@ -9,6 +9,53 @@ namespace IntrinsicsGeneric.Simd
         where T : unmanaged
     {
         protected Avx() { }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TestZ(Vector256<T> va, Vector256<T> vb)
+        {
+            if (typeof(T) == typeof(sbyte))
+            {
+                return Avx.TestZ(va.As<T, sbyte>(), vb.As<T, sbyte>());
+            }
+            if (typeof(T) == typeof(byte))
+            {
+                return Avx.TestZ(va.As<T, byte>(), vb.As<T, byte>());
+            }
+            if (typeof(T) == typeof(short))
+            {
+                return Avx.TestZ(va.As<T, short>(), vb.As<T, short>());
+            }
+            if (typeof(T) == typeof(ushort))
+            {
+                return Avx.TestZ(va.As<T, ushort>(), vb.As<T, ushort>());
+            }
+            if (typeof(T) == typeof(int))
+            {
+                return Avx.TestZ(va.As<T, int>(), vb.As<T, int>());
+            }
+            if (typeof(T) == typeof(uint))
+            {
+                return Avx.TestZ(va.As<T, uint>(), vb.As<T, uint>());
+            }
+            if (typeof(T) == typeof(long))
+            {
+                return Avx.TestZ(va.As<T, long>(), vb.As<T, long>());
+            }
+            if (typeof(T) == typeof(ulong))
+            {
+                return Avx.TestZ(va.As<T, ulong>(), vb.As<T, ulong>());
+            }
+            if (typeof(T) == typeof(float))
+            {
+                return Avx.TestZ(va.As<T, float>(), vb.As<T, float>());
+            }
+            if (typeof(T) == typeof(double))
+            {
+                return Avx.TestZ(va.As<T, double>(), vb.As<T, double>());
+            }
+
+            throw new NotSupportedException();
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> LoadVector256(T* address)
