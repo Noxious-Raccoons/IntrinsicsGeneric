@@ -109,11 +109,11 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         public void AllBitsSet256X()
         {
             // Arrange
-            var expected = new BitArray(256);
+            BitArray expected = new BitArray(256);
             expected.SetAll(true);
             
-            var bytes = new List<byte>(sizeof(byte) * Vector256<byte>.Count);
-            var vector = Vector256<byte>.AllBitsSet;
+            List<byte> bytes = new List<byte>(sizeof(byte) * Vector256<byte>.Count);
+            Vector256<byte> vector = Vector256<byte>.AllBitsSet;
             
             // Act
             for (int i = 0; i < Vector256<byte>.Count; i++)
@@ -122,10 +122,12 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
                 bytes.AddRange(new[] { Unsafe.As<byte, byte>(ref element) });
             }
             
-            var actual = new BitArray(bytes.ToArray());
+            BitArray actual = new BitArray(bytes.ToArray());
             
             // Assert
+            Assert.IsTrue(actual.Cast<bool>().All(b => b));
             Assert.AreEqual(expected, actual);
+            
         }
 #endif
 
