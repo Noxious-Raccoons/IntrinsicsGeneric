@@ -7,6 +7,7 @@ using System.Runtime.Intrinsics;
 //#if NETCOREAPP3_1
 using System.Diagnostics;
 using System.Numerics;
+using System.Runtime.Intrinsics.X86;
 using IntrinsicsGeneric.Simd;
 
 //#endif
@@ -62,36 +63,63 @@ namespace IntrinsicsGeneric.Extensions
                 return false;
             }
             
-            fixed (T* ptr = array)
+            var i = 0;
+            
+            /*&if (Avx2<T>.IsSupported)
             {
-                var i = 0;
-                var size = Vector256<T>.Count;
-                var lastIndexBlock = array.Length - array.Length % size;
-                
-                var elementVec = VectorHelper<T>.CreateVector256(value);
-                
-                for (; i < lastIndexBlock; i += size)
+                fixed (T* ptr = array)
                 {
-                    var curr = Avx<T>.LoadVector256(ptr + i);
-                    var mask = Avx2<T>.CompareEqual(curr, elementVec);
+                    var size = Vector256<T>.Count;
+                    var lastIndexBlock = array.Length - array.Length % size;
+                
+                    var elementVec = VectorHelper<T>.CreateVector256(value);
+                
+                    for (; i < lastIndexBlock; i += size)
+                    {
+                        var curr = Avx<T>.LoadVector256(ptr + i);
+                        var mask = Avx2<T>.CompareEqual(curr, elementVec);
                     
-                    if (!Avx<T>.TestZ(mask, mask))
-                    {
-                        return true;
-                    }
-                }
-                
-                
-                var comparer = Comparer<T>.Default;
-                
-                for (; i < array.Length; i++)
-                {
-                    if (comparer.Compare(array[i], value) == 0)
-                    {
-                        return true;
+                        if (!Avx<T>.TestZ(mask, mask))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
+            else*/ if (Sse41<T>.IsSupported && TypeHelper<T>.IsSupport64Bit())
+            {
+                fixed (T* ptr = array)
+                {
+                    var size = Vector128<T>.Count;
+                    var lastIndexBlock = array.Length - array.Length % size;
+                
+                    var elementVec = VectorHelper<T>.CreateVector128(value);
+                
+                    for (; i < lastIndexBlock; i += size)
+                    {
+                        var curr = Sse2<T>.LoadVector128(ptr + i);
+                        var mask = Sse41<T>.CompareEqual(curr, elementVec);
+                    
+                        if (!Sse41<T>.TestZ(mask, mask))
+                        {
+                            return true;
+                        }
+                    }
+                    
+                   
+                }
+            }
+            
+            var comparer = Comparer<T>.Default;
+            
+            for (; i < array.Length; i++)
+            {
+                if (comparer.Compare(array[i], value) == 0)
+                {
+                    return true;
+                }
+            }
+            
             return false;
         }
         

@@ -10,6 +10,12 @@ namespace IntrinsicsGeneric.Simd
     {
         protected Avx2() { }
 
+        public new static bool IsSupported
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => Avx2.IsSupported;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Add(Vector256<T> va, Vector256<T> vb)
         {

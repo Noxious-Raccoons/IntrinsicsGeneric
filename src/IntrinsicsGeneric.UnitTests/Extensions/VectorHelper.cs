@@ -77,7 +77,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
 
             var actual = VectorHelper<T>.AllBitsSet128.ToBitArray();
 
-            Assert.IsTrue(actual.Cast<bool>().All((b) => b));
+            Assert.IsTrue(actual.Cast<bool>().All(b => b));
             Assert.AreEqual(expected, actual);
         }
 
@@ -107,7 +107,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
 
             var actual = VectorHelper<T>.AllBitsSet256.ToBitArray();
 
-            Assert.IsTrue(actual.Cast<bool>().All((b) => b));
+            Assert.IsTrue(actual.Cast<bool>().All(b => b));
             Assert.AreEqual(expected, actual);
         }
     }

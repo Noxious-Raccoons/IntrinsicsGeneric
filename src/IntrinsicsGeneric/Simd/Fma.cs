@@ -9,6 +9,12 @@ namespace IntrinsicsGeneric.Simd
         where T : unmanaged
     {
         protected Fma() { }
+        
+        public new static bool IsSupported
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => Fma.IsSupported;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Vector128<T> MultiplyAdd(Vector128<T> a, Vector128<T> b, Vector128<T> c)

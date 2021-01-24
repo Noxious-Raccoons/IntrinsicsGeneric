@@ -9,6 +9,12 @@ namespace IntrinsicsGeneric.Simd
         where T : unmanaged
     {
         protected Sse2() { }
+        
+        public static bool IsSupported
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => Sse2.IsSupported;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> Add(Vector128<T> va, Vector128<T> vb)

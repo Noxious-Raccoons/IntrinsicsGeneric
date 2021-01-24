@@ -9,7 +9,13 @@ namespace IntrinsicsGeneric.Simd
         where T : unmanaged
     {
         protected Avx() { }
-        
+
+        public new static bool IsSupported
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => Avx.IsSupported;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TestZ(Vector256<T> va, Vector256<T> vb)
         {
