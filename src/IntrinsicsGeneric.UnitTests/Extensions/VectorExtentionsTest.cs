@@ -9,16 +9,16 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
 {
     public class VectorExtensionsTest
     {
-        [TestCase(1, 4)]
-        [TestCase(1U, 4U)]
-        [TestCase(1F, 4F)]
-        [TestCase(1L, 2L)]
-        [TestCase(1UL, 2UL)]
-        [TestCase(1D, 2D)]
-        [TestCase((short)1, (short)8)]
-        [TestCase((ushort)1, (ushort)8)]
-        [TestCase((byte)1, (byte)16)]
-        [TestCase((sbyte)1, (sbyte)16)]
+        //[TestCase(1, 4)]
+        //[TestCase(1U, 4U)]
+        //[TestCase(1F, 4F)]
+        //[TestCase(1L, 2L)]
+        //[TestCase(1UL, 2UL)]
+        //[TestCase(1D, 2D)]
+        //[TestCase((short)1, (short)8)]
+        //[TestCase((ushort)1, (ushort)8)]
+        //[TestCase((byte)1, (byte)16)]
+        //[TestCase((sbyte)1, (sbyte)16)]
         public void Vector128Sum<T>(T value, T expected)
             where T : unmanaged
         {
@@ -29,16 +29,16 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             Assert.AreEqual(expected, result);
         }
 
-        [TestCase(1, 8)]
-        [TestCase(1U, 8U)]
-        [TestCase(1F, 8F)]
-        [TestCase(1L, 4L)]
-        [TestCase(1UL, 4UL)]
-        [TestCase(1D, 4D)]
-        [TestCase((short)1, (short)16)]
-        [TestCase((ushort)1, (ushort)16)]
-        [TestCase((byte)1, (byte)32)]
-        [TestCase((sbyte)1, (sbyte)32)]
+        //[TestCase(1, 8)]
+        //[TestCase(1U, 8U)]
+        //[TestCase(1F, 8F)]
+        //[TestCase(1L, 4L)]
+        //[TestCase(1UL, 4UL)]
+        //[TestCase(1D, 4D)]
+        //[TestCase((short)1, (short)16)]
+        //[TestCase((ushort)1, (ushort)16)]
+        //[TestCase((byte)1, (byte)32)]
+        //[TestCase((sbyte)1, (sbyte)32)]
         public void Vector256Sum<T>(T value, T expected)
             where T : unmanaged
         {
@@ -51,7 +51,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         
         #region Contains
 
-        [Test]
+        //[Test]
         public void Contains_True()
         {
             TestContext.Write(Avx2.IsSupported);
@@ -86,7 +86,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             Assert.IsTrue(VectorExtensions.Contains<double>(new double[] { 42, 37, 42, 37.98 }, 37.98));
         }
         
-        [Test]
+        //[Test]
         public void Contains_False()
         {
             Assert.IsFalse(VectorExtensions.Contains<byte>(new byte[]
