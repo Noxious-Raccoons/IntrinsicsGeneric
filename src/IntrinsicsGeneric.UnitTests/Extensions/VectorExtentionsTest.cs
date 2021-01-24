@@ -51,7 +51,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         
         #region Contains
 
-        //[Test]
+        [Test]
         public void Contains_True()
         {
             TestContext.Write(Avx2.IsSupported);
