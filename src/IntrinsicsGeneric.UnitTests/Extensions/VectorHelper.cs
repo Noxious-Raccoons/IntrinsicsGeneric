@@ -105,7 +105,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
         }
         
 #if NET5_0
-        [Test]
+        //[Test]
         public void AllBitsSet256X()
         {
             // Arrange
