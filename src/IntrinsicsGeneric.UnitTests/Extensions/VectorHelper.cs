@@ -104,10 +104,10 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             Assert.IsTrue(false);
         }
         
+#if NET5_0
         [Test]
         public void AllBitsSet256X()
         {
-#if NET5_0
             // Arrange
             var expected = new BitArray(256);
             expected.SetAll(true);
@@ -127,8 +127,8 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             // Assert
             Assert.IsTrue(actual.Cast<bool>().All(b => b));
             Assert.AreEqual(expected, actual);
-#endif
         }
+#endif
 
         private static void AllBitsSet256<T>()
             where T : unmanaged
