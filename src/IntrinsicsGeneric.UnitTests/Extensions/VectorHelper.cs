@@ -51,7 +51,7 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             Assert.AreEqual(Vector256.Create(value), VectorHelper<double>.CreateVector256(value));
         }
 
-        //[Test]
+        [Test]
         public void AllBitsSet128()
         {
             AllBitsSet128<byte>();
