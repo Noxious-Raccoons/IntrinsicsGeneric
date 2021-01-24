@@ -113,20 +113,10 @@ namespace IntrinsicsGeneric.UnitTests.Extensions
             expected.SetAll(true);
             
             var bytes = new List<byte>(sizeof(byte) * Vector256<byte>.Count);
-            var vector = Vector256<byte>.AllBitsSet;
-            
+
             // Act
-            var element = vector.GetElement(0);
-            bytes.AddRange(new[] { Unsafe.As<byte, byte>(ref element) });
-
-            /*
-
-            var actual = new BitArray(bytes.ToArray());
-            
-            // Assert
-            Assert.IsTrue(actual.Cast<bool>().All(b => b));
-            Assert.AreEqual(expected, actual);
-            */
+            byte element = 0;
+            bytes.AddRange(new[] { ref element });
         }
 #endif
 
