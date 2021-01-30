@@ -1,25 +1,25 @@
-﻿using IntrinsicsGeneric.Extensions;
+﻿using System.Runtime.Intrinsics;
+using IntrinsicsGeneric.Extensions;
 using IntrinsicsGeneric.Simd;
-using NUnit.Framework;
-using System.Runtime.Intrinsics;
+using Xunit;
+using AVX = System.Runtime.Intrinsics.X86.Avx;
+
 
 namespace IntrinsicsGeneric.UnitTests.Simd
 {
-    [TestFixture]
     public class Avx
     {
         public Avx()
         {
-            if (!System.Runtime.Intrinsics.X86.Avx.IsSupported)
+            if (!AVX.IsSupported)
             {
-                Assert.Inconclusive("Avx is not supported");
+                LongLivedMarshalByRefObject.DisconnectAll();
             }
         }
 
-        #region LoadVector256
-
-        [Test]
-        public void LoadVector256()
+        #region Load
+        
+        public void LoadVector256Test()
         {
             LoadVector256(new byte[]
             {
@@ -48,13 +48,13 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         private unsafe void LoadVector256<T>(T[] arr)
             where T : unmanaged
         {
-            Assert.AreEqual(Vector256<T>.Count, arr.Length);
+            Assert.Equal(Vector256<T>.Count, arr.Length);
             fixed (T* ptr = arr)
             {
                 var vector = Avx<T>.LoadVector256(ptr);
                 for (var i = 0; i < Vector256<T>.Count; i++)
                 {
-                    Assert.AreEqual(vector.GetElement(i), arr[i]);
+                    Assert.Equal(vector.GetElement(i), arr[i]);
                 }
             }
         }
@@ -63,8 +63,8 @@ namespace IntrinsicsGeneric.UnitTests.Simd
 
         #region Store
 
-        [Test]
-        public void Store()
+        [Fact]
+        public void StoreTest()
         {
             Store(new byte[]
             {
@@ -93,7 +93,7 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         private unsafe void Store<T>(T[] arr)
             where T : unmanaged
         {
-            Assert.AreEqual(Vector256<T>.Count, arr.Length);
+            Assert.Equal(Vector256<T>.Count, arr.Length);
 
             var vector = VectorHelper<T>.CreateVector256(default);
             fixed (T* ptr = arr)
@@ -103,7 +103,7 @@ namespace IntrinsicsGeneric.UnitTests.Simd
 
             for (var i = 0; i < Vector256<T>.Count; i++)
             {
-                Assert.AreEqual(default(T), arr[i]);
+                Assert.Equal(default(T), arr[i]);
             }
         }
 
