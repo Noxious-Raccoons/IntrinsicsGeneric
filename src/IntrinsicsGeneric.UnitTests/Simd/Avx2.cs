@@ -31,10 +31,6 @@ namespace IntrinsicsGeneric.UnitTests.Simd
         public void Add<T>(T value, T expected)
             where T : unmanaged
         {
-            InlineDataAttribute x = new InlineDataAttribute();
-            if (!System.Runtime.Intrinsics.X86.Avx2.IsSupported)
-            {
-            }
             var vector = VectorHelper<T>.CreateVector256(value);
             var expectedVector = VectorHelper<T>.CreateVector256(expected);
 

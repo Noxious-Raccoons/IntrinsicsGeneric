@@ -8,8 +8,7 @@ namespace IntrinsicsGeneric.InternalHelpers
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool IsFloatingPoint()
         {
-            return typeof(T) == typeof(double) ||
-                   typeof(T) == typeof(float);
+            return typeof(T) == typeof(double) || typeof(T) == typeof(float);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

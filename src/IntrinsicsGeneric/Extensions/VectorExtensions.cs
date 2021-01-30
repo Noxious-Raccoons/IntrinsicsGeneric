@@ -4,13 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
-//#if NETCOREAPP3_1
-using System.Diagnostics;
 using System.Numerics;
-using System.Runtime.Intrinsics.X86;
 using IntrinsicsGeneric.Simd;
-
-//#endif
 
 namespace IntrinsicsGeneric.Extensions
 {
@@ -65,7 +60,7 @@ namespace IntrinsicsGeneric.Extensions
             
             var i = 0;
             
-            /*&if (Avx2<T>.IsSupported)
+            if (Avx2<T>.IsSupported)
             {
                 fixed (T* ptr = array)
                 {
@@ -86,7 +81,7 @@ namespace IntrinsicsGeneric.Extensions
                     }
                 }
             }
-            else*/ if (Sse41<T>.IsSupported && TypeHelper<T>.IsSupport64Bit())
+            else if (Sse41<T>.IsSupported && TypeHelper<T>.IsSupport64Bit())
             {
                 fixed (T* ptr = array)
                 {
@@ -105,8 +100,6 @@ namespace IntrinsicsGeneric.Extensions
                             return true;
                         }
                     }
-                    
-                   
                 }
             }
             
@@ -212,26 +205,17 @@ namespace IntrinsicsGeneric.Extensions
 
             throw new NotSupportedException();
         }
-
-//#if NETCOREAPP3_1
-
+        
         public static Vector128<T> AsVector128<T>(this Vector<T> value)
             where T : struct
         {
-            Debug.Assert(Vector<T>.Count >= Vector128<T>.Count);
             return Unsafe.As<Vector<T>, Vector128<T>>(ref value);
         }
 
         public static Vector256<T> AsVector256<T>(this Vector<T> value)
             where T : struct
         {
-            Debug.Assert(Vector256<T>.Count >= Vector<T>.Count);
-
-            //Vector256<T> result = default;
-            //Unsafe.WriteUnaligned(ref Unsafe.As<Vector256<T>, byte>(ref result), value);
-            //return result;
             return Unsafe.As<Vector<T>, Vector256<T>>(ref value);
         }
-//#endif
     }
 }
