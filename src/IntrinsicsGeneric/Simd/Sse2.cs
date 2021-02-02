@@ -9,12 +9,6 @@ namespace IntrinsicsGeneric.Simd
         where T : unmanaged
     {
         protected Sse2() { }
-        
-        public static bool IsSupported
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Sse2.IsSupported;
-        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> Add(Vector128<T> va, Vector128<T> vb)
@@ -248,6 +242,53 @@ namespace IntrinsicsGeneric.Simd
             if (typeof(T) == typeof(float))
             {
                 return Sse.Subtract(va.As<T, float>(), vb.As<T, float>()).As<float, T>();
+            }
+
+            throw new NotSupportedException();
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<T> CompareEqual(Vector128<T> va, Vector128<T> vb)
+        {
+            if (typeof(T) == typeof(sbyte))
+            {
+                return Sse2.CompareEqual(va.As<T, sbyte>(), vb.As<T, sbyte>()).As<sbyte, T>();
+            }
+            if (typeof(T) == typeof(byte))
+            {
+                return Sse2.CompareEqual(va.As<T, byte>(), vb.As<T, byte>()).As<byte, T>();
+            }
+            if (typeof(T) == typeof(short))
+            {
+                return Sse2.CompareEqual(va.As<T, short>(), vb.As<T, short>()).As<short, T>();
+            }
+            if (typeof(T) == typeof(ushort))
+            {
+                return Sse2.CompareEqual(va.As<T, ushort>(), vb.As<T, ushort>()).As<ushort, T>();
+            }
+            if (typeof(T) == typeof(int))
+            {
+                return Sse2.CompareEqual(va.As<T, int>(), vb.As<T, int>()).As<int, T>();
+            }
+            if (typeof(T) == typeof(uint))
+            {
+                return Sse2.CompareEqual(va.As<T, uint>(), vb.As<T, uint>()).As<uint, T>();
+            }
+            if (typeof(T) == typeof(long))
+            {
+                return Sse2.CompareEqual(va.As<T, byte>(), vb.As<T, byte>()).As<byte, long>().As<long, T>();
+            }
+            if (typeof(T) == typeof(ulong))
+            {
+                return Sse2.CompareEqual(va.As<T, byte>(), vb.As<T, byte>()).As<byte, ulong>().As<ulong, T>();
+            }
+            if (typeof(T) == typeof(float))
+            {
+                return Sse.CompareEqual(va.As<T, float>(), vb.As<T, float>()).As<float, T>();
+            }
+            if (typeof(T) == typeof(double))
+            {
+                return Sse2.CompareEqual(va.As<T, double>(), vb.As<T, double>()).As<double, T>();
             }
 
             throw new NotSupportedException();

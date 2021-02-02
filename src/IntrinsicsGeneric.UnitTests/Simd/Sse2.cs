@@ -16,28 +16,8 @@ namespace IntrinsicsGeneric.UnitTests.Simd
             }
         }
         #region Add
-
-        [InlineData(1, 2)]
-        [InlineData(1U, 2U)]
-        [InlineData(1F, 2F)]
-        [InlineData(1L, 2L)]
-        [InlineData(1UL, 2UL)]
-        [InlineData(1D, 2D)]
-        [InlineData((short)1, (short)2)]
-        [InlineData((ushort)1, (ushort)2)]
-        [InlineData((byte)1, (byte)2)]
-        [InlineData((sbyte)1, (sbyte)2)]
-        public void Add<T>(T value, T expected)
-            where T : unmanaged
-        {
-            var vector = VectorHelper<T>.CreateVector128(value);
-            var expectedVector = VectorHelper<T>.CreateVector128(expected);
-
-            var result = Sse2<T>.Add(vector, vector);
-
-            Assert.Equal(expectedVector, result);
-        }
-
+        
+        [Theory]
         [InlineData(1, 2, 3)]
         [InlineData(1U, 2U, 3U)]
         [InlineData(1F, 2F, 3F)]
@@ -64,6 +44,7 @@ namespace IntrinsicsGeneric.UnitTests.Simd
 
         #region And
 
+        [Theory]
         [InlineData((sbyte)1, (sbyte)0, (sbyte)0)]
         [InlineData((sbyte)1, (sbyte)1, (sbyte)1)]
         [InlineData((sbyte)0b1010, (sbyte)0b1010, (sbyte)0b1010)]
@@ -240,27 +221,7 @@ namespace IntrinsicsGeneric.UnitTests.Simd
 
         #region Subtract
 
-        [InlineData(1, 0)]
-        [InlineData(1U, 0U)]
-        [InlineData(1F, 0F)]
-        [InlineData(1L, 0L)]
-        [InlineData(1UL, 0UL)]
-        [InlineData(1D, 0D)]
-        [InlineData((short)1, (short)0)]
-        [InlineData((ushort)1, (ushort)0)]
-        [InlineData((byte)1, (byte)0)]
-        [InlineData((sbyte)1, (sbyte)0)]
-        public void Subtract<T>(T value, T expected)
-            where T : unmanaged
-        {
-            var vector = VectorHelper<T>.CreateVector128(value);
-            var expectedVector = VectorHelper<T>.CreateVector128(expected);
-
-            var result = Sse2<T>.Subtract(vector, vector);
-
-            Assert.Equal(expectedVector, result);
-        }
-
+        [Theory]
         [InlineData(42, 2, 40)]
         [InlineData(3U, 2U, 1U)]
         [InlineData(3F, 2F, 1F)]

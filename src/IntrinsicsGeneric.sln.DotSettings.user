@@ -1,0 +1,16 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=477395ea_002D7617_002D449d_002D8e84_002Dfa466e672358/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Avx2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Simd.Avx2&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Simd.Avx.LoadVector256Test&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Simd.Avx&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Simd.Sse2&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Extensions.VectorExtensionsTest.Contains_False&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Extensions.VectorExtensionsTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Extensions.VectorHelper.Contains256_True&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Extensions.VectorHelper.Contains256_False&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Extensions.VectorHelper.Contains_False&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Extensions.VectorHelper.Contains_True&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Extensions.VectorHelper&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Numerics;
+using System.Runtime.Intrinsics.X86;
 using IntrinsicsGeneric.Simd;
 
 namespace IntrinsicsGeneric.Extensions
@@ -40,92 +41,17 @@ namespace IntrinsicsGeneric.Extensions
         public static bool Contains<T>(this Vector128<T> vector, T value)
             where T : unmanaged
         {
-            bool result = false;
-            for (var i = 0; i < Vector128<T>.Count && !result; i++)
-            {
-                result = vector.GetElement(i).Equals(value);
-            }
-
-            return result;
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe bool Contains<T>(T[] array, T value)
-            where T : unmanaged
-        {
-            if (array.Length < 1)
-            {
-                return false;
-            }
-            
-            var i = 0;
-            
-            if (Avx2<T>.IsSupported)
-            {
-                fixed (T* ptr = array)
-                {
-                    var size = Vector256<T>.Count;
-                    var lastIndexBlock = array.Length - array.Length % size;
-                
-                    var elementVec = VectorHelper<T>.CreateVector256(value);
-                
-                    for (; i < lastIndexBlock; i += size)
-                    {
-                        var curr = Avx<T>.LoadVector256(ptr + i);
-                        var mask = Avx2<T>.CompareEqual(curr, elementVec);
-                    
-                        if (!Avx<T>.TestZ(mask, mask))
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-            else if (Sse41<T>.IsSupported && TypeHelper<T>.IsSupport64Bit())
-            {
-                fixed (T* ptr = array)
-                {
-                    var size = Vector128<T>.Count;
-                    var lastIndexBlock = array.Length - array.Length % size;
-                
-                    var elementVec = VectorHelper<T>.CreateVector128(value);
-                
-                    for (; i < lastIndexBlock; i += size)
-                    {
-                        var curr = Sse2<T>.LoadVector128(ptr + i);
-                        var mask = Sse41<T>.CompareEqual(curr, elementVec);
-                    
-                        if (!Sse41<T>.TestZ(mask, mask))
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-            
-            var comparer = Comparer<T>.Default;
-            
-            for (; i < array.Length; i++)
-            {
-                if (comparer.Compare(array[i], value) == 0)
-                {
-                    return true;
-                }
-            }
-            
-            return false;
+            var element = VectorHelper<T>.CreateVector128(value);
+            var mask = Sse41<T>.CompareEqual(vector, element);
+            return !Sse41<T>.TestAllZeros(mask, mask);
         }
         
         public static bool Contains<T>(this Vector256<T> vector, T value)
             where T : unmanaged
         {
-            bool result = false;
-            for (var i = 0; i < Vector256<T>.Count && !result; i++)
-            {
-                result = vector.GetElement(i).Equals(value);
-            }
-
-            return result;
+            var element = VectorHelper<T>.CreateVector256(value);
+            var mask = Avx2<T>.CompareEqual(vector, element);
+            return !Avx<T>.TestAllZeros(mask, mask);
         }
 
         public static unsafe BitArray ToBitArray<T>(this Vector128<T> vector)

@@ -2,8 +2,6 @@
 using IntrinsicsGeneric.Extensions;
 using IntrinsicsGeneric.Simd;
 using Xunit;
-using AVX = System.Runtime.Intrinsics.X86.Avx;
-
 
 namespace IntrinsicsGeneric.UnitTests.Simd
 {
@@ -11,7 +9,7 @@ namespace IntrinsicsGeneric.UnitTests.Simd
     {
         public Avx()
         {
-            if (!AVX.IsSupported)
+            if (!System.Runtime.Intrinsics.X86.Avx.IsSupported)
             {
                 LongLivedMarshalByRefObject.DisconnectAll();
             }
@@ -19,6 +17,7 @@ namespace IntrinsicsGeneric.UnitTests.Simd
 
         #region Load
         
+        [Fact]
         public void LoadVector256Test()
         {
             LoadVector256(new byte[]

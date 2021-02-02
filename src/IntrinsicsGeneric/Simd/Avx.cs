@@ -10,14 +10,8 @@ namespace IntrinsicsGeneric.Simd
     {
         protected Avx() { }
 
-        public new static bool IsSupported
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Avx.IsSupported;
-        }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TestZ(Vector256<T> va, Vector256<T> vb)
+        public static bool TestAllZeros(Vector256<T> va, Vector256<T> vb)
         {
             if (typeof(T) == typeof(sbyte))
             {

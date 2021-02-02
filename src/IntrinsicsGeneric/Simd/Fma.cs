@@ -10,12 +10,6 @@ namespace IntrinsicsGeneric.Simd
     {
         protected Fma() { }
         
-        public new static bool IsSupported
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => Fma.IsSupported;
-        }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Vector128<T> MultiplyAdd(Vector128<T> a, Vector128<T> b, Vector128<T> c)
         {
@@ -28,7 +22,6 @@ namespace IntrinsicsGeneric.Simd
                 return Fma.MultiplyAdd(a.As<T, double>(), b.As<T, double>(), c.As<T, double>()).As<double, T>();
             }
 
-            Sse2.X64.ConvertScalarToVector128Double(a.As<T, double>(), 15);
             throw new NotSupportedException();
         }
     }
