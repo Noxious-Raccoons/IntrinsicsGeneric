@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Intrinsics;
 using IntrinsicsGeneric.Extensions;
+using IntrinsicsGeneric.Helpers;
 using IntrinsicsGeneric.Simd;
 using Xunit;
 using AVX2 = System.Runtime.Intrinsics.X86.Avx2;
