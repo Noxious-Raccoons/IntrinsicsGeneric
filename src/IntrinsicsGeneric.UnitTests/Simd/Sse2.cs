@@ -1,9 +1,7 @@
-﻿using System.Runtime.Intrinsics;
-using IntrinsicsGeneric.Extensions;
-using IntrinsicsGeneric.Helpers;
+﻿using IntrinsicsGeneric.Helpers;
 using IntrinsicsGeneric.Simd;
+using System.Runtime.Intrinsics;
 using Xunit;
-using SSE2 = System.Runtime.Intrinsics.X86.Sse2;
 
 namespace IntrinsicsGeneric.UnitTests.Simd
 {
@@ -11,7 +9,7 @@ namespace IntrinsicsGeneric.UnitTests.Simd
     {
         public Sse2()
         {
-            if (!SSE2.IsSupported)
+            if (!System.Runtime.Intrinsics.X86.Sse2.IsSupported)
             {
                 LongLivedMarshalByRefObject.DisconnectAll();
             }

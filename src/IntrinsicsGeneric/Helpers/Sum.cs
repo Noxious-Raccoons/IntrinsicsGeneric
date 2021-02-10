@@ -1,9 +1,9 @@
-using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics;
-using System.Runtime.Intrinsics.X86;
 using IntrinsicsGeneric.Extensions;
 using IntrinsicsGeneric.InternalHelpers;
 using IntrinsicsGeneric.Simd;
+using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 
 namespace IntrinsicsGeneric.Helpers
 {

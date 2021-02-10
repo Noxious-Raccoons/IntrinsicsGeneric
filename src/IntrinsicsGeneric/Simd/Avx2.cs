@@ -143,7 +143,7 @@ namespace IntrinsicsGeneric.Simd
             {
 #if NETCOREAPP3_1
                 return Avx.Compare(va.As<T, float>(), vb.As<T, float>(), FloatComparisonMode.UnorderedEqualSignaling).As<float, T>();
-#elif NET5_0
+#else
                 return Avx.CompareEqual(va.As<T, float>(), vb.As<T, float>()).As<float, T>();
 #endif
             }
@@ -151,7 +151,7 @@ namespace IntrinsicsGeneric.Simd
             {
 #if NETCOREAPP3_1
                 return Avx.Compare(va.As<T, double>(), vb.As<T, double>(), FloatComparisonMode.UnorderedEqualSignaling).As<double, T>();
-#elif NET5_0
+#else
                 return Avx.CompareEqual(va.As<T, double>(), vb.As<T, double>()).As<double, T>();
 #endif
             }
