@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntrinsicsGeneric.Helpers;
+using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
@@ -25,6 +26,44 @@ namespace IntrinsicsGeneric.Simd
         /// >> dst[i+7:i] := a[i+7:i] + b[i+7:i]
         /// ENDFOR
         /// </code>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Contains(Vector128<T> vector, T value)
+        {
+            var element = VectorHelper<T>.CreateVector128(value);
+            var mask = CompareEqual(vector, element);
+            return MoveMask(mask) != 0xFFFF;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Contains(Vector128<T> vector, Vector128<T> value)
+        {
+            var mask = CompareEqual(vector, value);
+            return MoveMask(mask) != 0xFFFF;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int MoveMask(Vector128<T> a)
+        {
+            if (typeof(T) == typeof(byte))
+            {
+                return Sse2.MoveMask(a.As<T, byte>());
+            }
+            if (typeof(T) == typeof(sbyte))
+            {
+                return Sse2.MoveMask(a.As<T, sbyte>());
+            }
+            if (typeof(T) == typeof(float))
+            {
+                return Sse.MoveMask(a.As<T, float>());
+            }
+            if (typeof(T) == typeof(double))
+            {
+                return Sse2.MoveMask(a.As<T, double>());
+            }
+
+            throw new NotSupportedException();
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> Add(Vector128<T> va, Vector128<T> vb)
         {
@@ -308,6 +347,45 @@ namespace IntrinsicsGeneric.Simd
             if (typeof(T) == typeof(float))
             {
                 return Sse.Subtract(va.As<T, float>(), vb.As<T, float>()).As<float, T>();
+            }
+
+            throw new NotSupportedException();
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<T> CompareEqual(Vector128<T> va, Vector128<T> vb)
+        {
+            if (typeof(T) == typeof(sbyte))
+            {
+                return Sse2.CompareEqual(va.As<T, sbyte>(), vb.As<T, sbyte>()).As<sbyte, T>();
+            }
+            if (typeof(T) == typeof(byte))
+            {
+                return Sse2.CompareEqual(va.As<T, byte>(), vb.As<T, byte>()).As<byte, T>();
+            }
+            if (typeof(T) == typeof(short))
+            {
+                return Sse2.CompareEqual(va.As<T, short>(), vb.As<T, short>()).As<short, T>();
+            }
+            if (typeof(T) == typeof(ushort))
+            {
+                return Sse2.CompareEqual(va.As<T, ushort>(), vb.As<T, ushort>()).As<ushort, T>();
+            }
+            if (typeof(T) == typeof(int))
+            {
+                return Sse2.CompareEqual(va.As<T, int>(), vb.As<T, int>()).As<int, T>();
+            }
+            if (typeof(T) == typeof(uint))
+            {
+                return Sse2.CompareEqual(va.As<T, uint>(), vb.As<T, uint>()).As<uint, T>();
+            }
+            if (typeof(T) == typeof(float))
+            {
+                return Sse.CompareEqual(va.As<T, float>(), vb.As<T, float>()).As<float, T>();
+            }
+            if (typeof(T) == typeof(double))
+            {
+                return Sse2.CompareEqual(va.As<T, double>(), vb.As<T, double>()).As<double, T>();
             }
 
             throw new NotSupportedException();

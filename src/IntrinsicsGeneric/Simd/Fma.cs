@@ -39,7 +39,6 @@ namespace IntrinsicsGeneric.Simd
                 return Fma.MultiplyAdd(a.As<T, double>(), b.As<T, double>(), c.As<T, double>()).As<double, T>();
             }
 
-            Sse2.X64.ConvertScalarToVector128Double(a.As<T, double>(), 15);
             throw new NotSupportedException();
         }
     }

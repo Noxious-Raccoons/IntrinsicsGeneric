@@ -1,15 +1,16 @@
-﻿using IntrinsicsGeneric.Simd;
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
+using IntrinsicsGeneric.Simd;
 
-namespace IntrinsicsGeneric.Extensions
+namespace IntrinsicsGeneric.Helpers
 {
-    public unsafe class VectorHelper<T>
+    public static unsafe partial class VectorHelper<T>
         where T : unmanaged
     {
-        protected VectorHelper() { }
-
+        /// <summary>
+        /// Gets a new Vector128<T/> with all bits set to 1. 
+        /// </summary>
         public static Vector128<T> AllBitsSet128
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -23,6 +24,9 @@ namespace IntrinsicsGeneric.Extensions
             }
         }
 
+        /// <summary>
+        /// Gets a new Vector256<T/> with all bits set to 1. 
+        /// </summary>
         public static Vector256<T> AllBitsSet256
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -36,6 +40,9 @@ namespace IntrinsicsGeneric.Extensions
             }
         }
 
+        /// <summary>
+        /// Gets a new Vector128<T/> with random values. 
+        /// </summary>
         public static Vector128<T> RandomBitsSet128
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -52,6 +59,9 @@ namespace IntrinsicsGeneric.Extensions
             }
         }
 
+        /// <summary>
+        /// Gets a new Vector256<T/> with random values. 
+        /// </summary>
         public static Vector256<T> RandomBitsSet256
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -63,7 +73,7 @@ namespace IntrinsicsGeneric.Extensions
 
                 fixed (byte* ptr = bytes)
                 {
-                    return Avx2<byte>.LoadVector256(ptr).As<byte, T>();
+                    return Avx<byte>.LoadVector256(ptr).As<byte, T>();
                 }
             }
         }
