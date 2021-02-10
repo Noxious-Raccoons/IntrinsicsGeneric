@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
-using IntrinsicsGeneric.Extensions;
 using IntrinsicsGeneric.Helpers;
 
 namespace IntrinsicsGeneric.Simd
@@ -77,10 +76,19 @@ namespace IntrinsicsGeneric.Simd
             {
                 return Sse41.TestZ(va.As<T, ulong>(), vb.As<T, ulong>());
             }
+            if (typeof(T) == typeof(float))
+            {
+                return Sse.MoveMask(va.As<T, float>()) == 0xFFFF;
+            }
+            if (typeof(T) == typeof(double))
+            {
+                return Sse2.MoveMask(va.As<T, double>()) == 0xFFFF;
+            }
             
             throw new NotSupportedException();
         }
         
+        // TODO: Add support double and float type 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TestAllOnes(Vector128<T> va, Vector128<T> vb)
         {

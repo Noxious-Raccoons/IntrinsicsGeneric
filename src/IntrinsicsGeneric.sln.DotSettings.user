@@ -14,5 +14,8 @@
     &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.Extensions.VectorHelper&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.ExtensionsTests.Contains.ShouldContainValueOfVector&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.ExtensionsTests.Contains.ShouldNotContainValueOfVector&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.VectorHelperTests.Sse2.Sum.ResultOfSumShouldBeEqualExpectedValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.VectorHelperTests.Sse2.Sum&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C4EAD125-79E9-4C24-9326-4B36832098BA::net5.0::IntrinsicsGeneric.UnitTests.VectorExtensionsTests.Sse2.Contains.Contains256_False&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

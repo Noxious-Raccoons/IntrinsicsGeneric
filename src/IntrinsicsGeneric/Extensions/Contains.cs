@@ -29,7 +29,6 @@ namespace IntrinsicsGeneric.Extensions
             {
                 return Sse41<T>.Contains(vector, value);
             }
-
             if (Sse2.IsSupported && 
                 typeof(T) == typeof(byte) ||
                 typeof(T) == typeof(sbyte) ||
