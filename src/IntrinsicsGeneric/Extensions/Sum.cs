@@ -87,6 +87,21 @@ namespace IntrinsicsGeneric.Extensions
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Gets sum of Vector256<T/>
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T Sum<T>(this Vector256<T> a)
+            where T : unmanaged
+        {
+            var sum = default(T);
+            for (var i = 0; i < (uint) Vector256<T>.Count; i++)
+            {
+                sum = MathUnsafe<T>.Add(sum, a.GetElement(i));
+            }
+            return sum;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static T HorizontalSumVector128<T>(Vector128<T> a)
             where T : unmanaged
@@ -105,21 +120,6 @@ namespace IntrinsicsGeneric.Extensions
         {
             var sum = default(T);
             for (var i = 0; i < (uint) Vector128<T>.Count; i++)
-            {
-                sum = MathUnsafe<T>.Add(sum, a.GetElement(i));
-            }
-            return sum;
-        }
-        
-        /// <summary>
-        /// Gets sum of Vector256<T/>
-        /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Sum<T>(this Vector256<T> a)
-            where T : unmanaged
-        {
-            var sum = default(T);
-            for (var i = 0; i < (uint) Vector256<T>.Count; i++)
             {
                 sum = MathUnsafe<T>.Add(sum, a.GetElement(i));
             }
