@@ -1,7 +1,6 @@
-﻿using System.Runtime.Intrinsics;
-using IntrinsicsGeneric.Extensions;
-using IntrinsicsGeneric.Helpers;
+﻿using IntrinsicsGeneric.Helpers;
 using IntrinsicsGeneric.Simd;
+using System.Runtime.Intrinsics;
 using Xunit;
 
 namespace IntrinsicsGeneric.UnitTests.Simd

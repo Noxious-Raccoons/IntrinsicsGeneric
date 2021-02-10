@@ -1,10 +1,8 @@
-﻿using System;
-using System.Numerics;
+﻿using IntrinsicsGeneric.Helpers;
+using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
-using IntrinsicsGeneric.Extensions;
-using IntrinsicsGeneric.Helpers;
 
 namespace IntrinsicsGeneric.Simd
 {
