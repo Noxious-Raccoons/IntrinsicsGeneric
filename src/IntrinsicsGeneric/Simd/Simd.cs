@@ -9,6 +9,9 @@ namespace IntrinsicsGeneric.Simd
     {
         protected Simd() { }
 
+        /// <summary>
+        /// Creates a new Vector128 instance with all elements initialized to the specified value.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> CreateVector128(T value)
         {
@@ -56,6 +59,9 @@ namespace IntrinsicsGeneric.Simd
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Creates a new Vector256 instance with all elements initialized to the specified value.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> CreateVector256(T value)
         {
